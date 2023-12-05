@@ -9,4 +9,11 @@
   <a href="/admin">Admin</a>
 </div>
 
-<h1>Hey, welcome to my project</h1>
+<h1>Input yout text below:</h1>
+
+<form method="POST" action="counter">
+  {% csrf_token %}
+  <textarea name="text" rows="15" cols="50"></textarea>
+  <br />
+  <input type="submit" />
+</form>
