@@ -1,0 +1,28 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}" />
+
+<div class="navbar">
+  <a href="/">Home</a>
+  <a href="/static">Static</a>
+  <a href="/form-counter">Form Counter</a>
+  <a href="/admin">Admin</a>
+</div>
+
+<p class="register-title">Login</p>
+
+{% for message in messages %}
+<h5>{{message}}</h5>
+{% endfor %}
+
+<form method="POST" action="login" class="register-form">
+  {% csrf_token %}
+  <label>Username:</label>
+  <input type="text" name="username" />
+  <label>Password:</label>
+  <input type="password" name="password" />
+  <br />
+  <input type="submit" />
+</form>
+
+<h3>You don't have an account? <a href="/register">Register</a></h3>
