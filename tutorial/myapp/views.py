@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import auth, messages
 from .models import Service
 
 
-def index(request):
-    return render(request, 'index.html')
+def formCounter(request):
+    return render(request, 'formCounter.html')
 
 
 def counter(request):
@@ -16,22 +18,55 @@ def static(request):
     return render(request, 'static.html')
 
 
-def arsha(request):
-    service1 = Service()
-    service1.id = 0
-    service1.name = 'Sale'
-    service1.details = 'We are one of the main sellers in the sector, with unbeatable statistics.'
+def index(request):
+    services = Service.objects.all()
 
-    service2 = Service()
-    service2.id = 1
-    service2.name = 'Notifications'
-    service2.details = 'If there is any change in the system, you will be notified instantly in your email account.'
+    return render(request, 'index.html', {'services': services})
 
-    service3 = Service()
-    service3.id = 2
-    service3.name = '24hs Support'
-    service3.details = 'We have a support service available 24 hours a day, 7 days a week, 365 days at year.'
 
-    services = [service1, service2, service3]
+def register(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm = request.POST['confirm']
 
-    return render(request, 'arsha.html', {'services': services})
+        if password == confirm:
+            if User.objects.filter(email=email).exists():
+                messages.info(request, 'Email Already Used')
+                return redirect('register')
+            elif User.objects.filter(username=username).exists():
+                messages.info(request, 'Username Already Taken')
+                return redirect('register')
+            else:
+                user = User.objects.create_user(
+                    username=username, email=email, password=password)
+                user.save()
+                return redirect('login')
+        else:
+            messages.error(request, 'Passwords Do Not Match')
+            return redirect('register')
+    else:
+        return render(request, 'register.html')
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Invalid Credentials')
+            return redirect('login')
+    else:
+        return render(request, 'login.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
