@@ -1,7 +1,6 @@
 from django.db import models
 
 
-class Service:
-    id: int
-    name: str
-    details: str
+class Service(models.Model):
+    name = models.CharField(max_length=100)
+    details = models.CharField(max_length=500)
