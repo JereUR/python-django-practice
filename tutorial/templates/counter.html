@@ -6,7 +6,18 @@
   <a href="/">Home</a>
   <a href="/static">Static</a>
   <a href="/form-counter">Form Counter</a>
+  <a href="/counter">Counter</a>
   <a href="/admin">Admin</a>
 </div>
 
+{% if amount != None%}
+
 <h1>The amount of words submitted is {{amount}}</h1>
+
+{% endif %}
+
+<br />
+
+{% for post in posts %}
+<h1><a href="{% url 'post' post %}">Post {{post}}</a></h1>
+{% endfor %}
