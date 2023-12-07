@@ -70,3 +70,5 @@ Procfile
 # Archivo de configuración de Docker
 docker-compose.yml
 Dockerfile
+
+myproject/settings.py
