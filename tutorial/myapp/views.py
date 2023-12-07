@@ -9,9 +9,14 @@ def formCounter(request):
 
 
 def counter(request):
-    text = request.POST['text']
-    amount_of_words = len(text.split())
-    return render(request, 'counter.html', {'amount': amount_of_words})
+    if request.method == 'POST':
+        text = request.POST['text']
+        amount_of_words = len(text.split())
+        posts = [1, 2, 3, 4, 5, 'tim', 'tom', 'john']
+        return render(request, 'counter.html', {'amount': amount_of_words, 'posts': posts})
+    else:
+        posts = [1, 2, 3, 4, 5, 'tim', 'tom', 'john']
+        return render(request, 'counter.html', {'amount': None, 'posts': posts})
 
 
 def static(request):
