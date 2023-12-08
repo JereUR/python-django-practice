@@ -1,0 +1,28 @@
+h1 {
+  color: red;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  margin: 5px;
+}
+
+.register-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 60%;
+}
+
+h5 {
+  color: red;
+}

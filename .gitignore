@@ -59,7 +59,8 @@ node_modules/
 *.js.map
 
 # Carpeta de archivos de compilación de Sass
-*.css
+tutorial/static/assets
+
 
 # Archivo de configuración de Heroku
 Procfile
