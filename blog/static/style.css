@@ -8,11 +8,20 @@ body {
   background: #f1f1f1;
 }
 
+a {
+  text-decoration: none;
+  color: #555;
+}
+
 .header {
   padding: 2px;
   font-size: 36px;
   text-align: center;
   background: white;
+}
+
+.header a {
+  color: black !important;
 }
 
 .leftcolumn {
