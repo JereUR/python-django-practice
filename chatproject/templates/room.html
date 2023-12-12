@@ -4,23 +4,27 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    {% comment %}
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"
     ></script>
+    {% endcomment %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
   </head>
   <body>
     <h2>{{room}} - DjChat</h2>
 
     <div id="display">
-      <!-- <div class="container darker">
-  <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
-  <span class="time-left">20th, April 2021</span>
-</div> -->
+      <div class="container darker">
+        <b>Tom</b>
+        <p>Hello Everyone, How Are You Guys Doing?</p>
+        <span class="time-left">20th, April 2021</span>
+      </div>
     </div>
 
+    {% comment %}
     <script>
       $(document).ready(function () {
         setInterval(function () {
@@ -49,6 +53,7 @@
         }, 1000)
       })
     </script>
+    {% endcomment %}
 
     <div class="container">
       <form id="post-form">
@@ -71,6 +76,7 @@
     </div>
   </body>
 
+  {% comment %}
   <script type="text/javascript">
     $(document).on('submit', '#post-form', function (e) {
       e.preventDefault()
@@ -91,4 +97,5 @@
       document.getElementById('message').value = ''
     })
   </script>
+  {% endcomment %}
 </html>
