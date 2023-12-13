@@ -4,6 +4,11 @@ body {
   padding: 0 20px;
 }
 
+a {
+  text-decoration: none;
+  color: #333;
+}
+
 .container {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
