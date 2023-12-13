@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Room, Message
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 
 def home(request):
@@ -37,3 +37,14 @@ def send(request):
         value=message, user=username, room=room_id)
     new_message.save()
     return HttpResponse('Message sent succesfully.')
+
+
+def getMessages(request, room):
+    room_details = get_object_or_404(Room, name=room)
+    messages = Message.objects.filter(room=room_details.id)
+
+    data = {
+        "messages": [{"user": message.user, "value": message.value, "date": message.date} for message in messages]
+    }
+
+    return JsonResponse(data)
