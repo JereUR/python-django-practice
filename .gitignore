@@ -57,7 +57,6 @@ ehthumbs.db
 node_modules/
 
 # Carpeta de archivos de compilación de TypeScript
-*.js
 *.js.map
 
 # Carpeta de archivos de compilación de Sass
