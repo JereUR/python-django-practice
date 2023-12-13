@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from chat.models import Room, Message
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import Room, Message
+from django.http import HttpResponse
 
 
 def home(request):
@@ -7,7 +8,12 @@ def home(request):
 
 
 def room(request, room):
-    return render(request, 'room.html', {'room': room})
+    username = request.GET.get('username')
+    try:
+        room_details = get_object_or_404(Room, name=room)
+    except Room.DoesNotExist:
+        return render(request, 'error_page.html')
+    return render(request, 'room.html', {'username': username, 'room': room, 'room_details': room_details})
 
 
 def checkview(request):
@@ -20,3 +26,14 @@ def checkview(request):
         new_room = Room.objects.create(name=room)
         new_room.save()
         return redirect('/'+room+'/?username='+username)
+
+
+def send(request):
+    message = request.POST['message']
+    username = request.POST['username']
+    room_id = request.POST['room_id']
+
+    new_message = Message.objects.create(
+        value=message, user=username, room=room_id)
+    new_message.save()
+    return HttpResponse('Message sent succesfully.')
